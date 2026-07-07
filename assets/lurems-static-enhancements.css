@@ -1,0 +1,104 @@
+.lurems-light-link {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: max-content;
+}
+
+.lurems-light-link::after {
+  content: "";
+  display: block;
+  width: 54%;
+  height: 3px;
+  margin-top: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(242, 201, 76, 0), rgba(242, 201, 76, 0.96), rgba(242, 201, 76, 0.2));
+  box-shadow: 0 0 14px rgba(242, 201, 76, 0.5);
+  transform-origin: left center;
+  animation: lurems-light-beam-grow 2.8s ease-in-out infinite;
+}
+
+@keyframes lurems-light-beam-grow {
+  0%, 100% {
+    transform: scaleX(0.62);
+    opacity: 0.62;
+  }
+  50% {
+    transform: scaleX(1.2);
+    opacity: 1;
+  }
+}
+
+.lurems-static-card-application {
+  margin-top: 16px;
+  border: 1px solid #c8ede8;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(26, 58, 56, 0.12), 0 4px 12px rgba(26, 58, 56, 0.07);
+}
+
+.lurems-static-card-application img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0e2422;
+}
+
+.lurems-static-card-caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+}
+
+.lurems-static-card-caption strong,
+.lurems-light-pattern-title {
+  color: #1a3a38;
+  font: 700 13px "Poppins", sans-serif;
+}
+
+.lurems-static-card-caption span,
+.lurems-light-pattern-copy {
+  color: #7bada8;
+  font: 400 12px/1.55 "Poppins", sans-serif;
+}
+
+.lurems-static-card-caption code {
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #eff9f7;
+  color: #45a99a;
+  font: 500 10px "DM Mono", monospace;
+  padding: 4px 9px;
+}
+
+.lurems-light-pattern-card {
+  border: 1px solid #c8ede8;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.lurems-light-pattern-demo {
+  min-height: 180px;
+  background: radial-gradient(circle at 62% 58%, rgba(242, 201, 76, 0.2), transparent 34%), linear-gradient(135deg, #1a3a38, #0a2220);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lurems-light-pattern-url {
+  color: #72cbbf;
+  font: 400 22px "Poppins", sans-serif;
+}
+
+.lurems-light-pattern-body {
+  padding: 20px;
+}
+
+.lurems-light-pattern-copy {
+  margin-top: 4px;
+}
