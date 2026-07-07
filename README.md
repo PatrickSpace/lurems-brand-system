@@ -1,11 +1,16 @@
 
-  # Brand System for Lurems
+# Brand System for Lurems
 
-  This is a code bundle for Brand System for Lurems. The original project is available at https://www.figma.com/design/pUekHAHDgXyQjOX3SPpo6j/Brand-System-for-Lurems.
+Static website for the Lurems brand system.
 
-  ## Running the code
+The site is ready to serve directly from this folder. No npm install or build step is required.
 
-  Run `npm i` to install the dependencies.
+## Local Preview
 
-  Run `npm run dev` to start the development server.
-  
+Open `index.html` in a browser, or run a tiny static server:
+
+```bash
+python3 -m http.server 5175 --bind 127.0.0.1
+```
+
+Then visit `http://127.0.0.1:5175/`.
