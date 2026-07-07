@@ -5,6 +5,10 @@ Static website for the Lurems brand system.
 
 The site is ready to serve directly from this folder. No npm install or build step is required.
 
+## Website
+
+GitHub Pages URL: https://patrickspace.github.io/lurems-brand-system/
+
 ## Local Preview
 
 Open `index.html` in a browser, or run a tiny static server:
