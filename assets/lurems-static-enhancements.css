@@ -25,6 +25,11 @@ body.lurems-webapps-active #root > div {
   min-height: auto !important;
 }
 
+body.lurems-webapps-active #root {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
 body.lurems-webapps-active #root main,
 body.lurems-webapps-active #root main + div {
   display: none !important;
@@ -338,6 +343,16 @@ body.lurems-webapps-active .lurems-webapps-host {
   padding: 0 14px;
 }
 
+.lurems-soft-button {
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid #c8ede8;
+  background: #ffffff;
+  color: #2a6c63;
+  padding: 0 14px;
+  font: 700 12px "Poppins", sans-serif;
+}
+
 .lurems-dashboard-cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -518,10 +533,847 @@ body.lurems-webapps-active .lurems-webapps-host {
   color: #4caf88;
 }
 
+.lurems-variant-mockup .lurems-app-chrome {
+  min-height: 560px;
+}
+
+.lurems-variant-canvas {
+  min-height: 440px;
+  display: grid;
+  gap: 14px;
+}
+
+.lurems-chip-row,
+.lurems-filter-bar,
+.lurems-modal-actions,
+.lurems-video-controls,
+.lurems-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lurems-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  background: #eff9f7;
+  color: #2a6c63;
+  padding: 0 10px;
+  font: 700 11px "Poppins", sans-serif;
+}
+
+.lurems-form-field,
+.lurems-privacy-panel,
+.lurems-kanban-column,
+.lurems-modal-card,
+.lurems-therapist-grid article,
+.lurems-reschedule-current,
+.lurems-slot-picker,
+.lurems-confirm-panel,
+.lurems-journal-editor,
+.lurems-mood-map,
+.lurems-payment-card,
+.lurems-card-preview,
+.lurems-invoice-list,
+.lurems-clinical-grid article,
+.lurems-video-room,
+.lurems-session-notepad,
+.lurems-note-editor,
+.lurems-task-sidebar,
+.lurems-resource-grid article,
+.lurems-resource-search,
+.lurems-assignment-bar,
+.lurems-billing-total,
+.lurems-payout-table,
+.lurems-tax-card {
+  border: 1px solid #c8ede8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(26, 58, 56, 0.08), 0 1px 3px rgba(26, 58, 56, 0.05);
+}
+
+.profile-layout {
+  grid-template-columns: 1fr 0.85fr;
+  grid-template-areas:
+    "hero privacy"
+    "form privacy";
+}
+
+.lurems-profile-hero {
+  grid-area: hero;
+  min-height: 190px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(69, 169, 154, 0.15), rgba(200, 237, 232, 0.35));
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.lurems-profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #c8ede8;
+  color: #2a6c63;
+  font: 800 18px "DM Mono", monospace;
+}
+
+.lurems-profile-hero span,
+.lurems-payment-card span,
+.lurems-billing-total span,
+.lurems-form-field span,
+.lurems-journal-editor span,
+.lurems-resource-search span,
+.lurems-reschedule-current span {
+  color: #7bada8;
+  font: 700 11px "DM Mono", monospace;
+  text-transform: uppercase;
+}
+
+.lurems-profile-hero h3 {
+  margin: 4px 0 6px;
+  color: #1a3a38;
+  font-size: 24px;
+}
+
+.lurems-profile-hero p,
+.lurems-privacy-panel p,
+.lurems-modal-card p,
+.lurems-therapist-grid p,
+.lurems-journal-editor p,
+.lurems-session-notepad p,
+.lurems-clinical-grid p {
+  color: #5a8480;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.lurems-form-grid {
+  grid-area: form;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lurems-form-field {
+  display: grid;
+  gap: 7px;
+  padding: 14px;
+}
+
+.lurems-form-field strong {
+  color: #1a3a38;
+  font-size: 13px;
+}
+
+.lurems-form-field.is-warning strong {
+  color: #b57a1d;
+}
+
+.lurems-privacy-panel {
+  grid-area: privacy;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lurems-toggle-row {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 10px;
+  background: #f5fafa;
+  padding: 0 12px;
+  color: #1a3a38;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lurems-toggle-row i {
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: #45a99a;
+  position: relative;
+}
+
+.lurems-toggle-row i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.lurems-toggle-row.is-off i {
+  background: #d8e7e4;
+}
+
+.lurems-toggle-row.is-off i::after {
+  left: 3px;
+  right: auto;
+}
+
+.agenda-layout {
+  grid-template-rows: auto 1fr;
+}
+
+.lurems-calendar-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lurems-calendar-strip button,
+.lurems-slot-picker button,
+.lurems-clinical-tabs button,
+.lurems-mood-selector button,
+.lurems-filter-bar button,
+.lurems-compare-tray button,
+.lurems-assignment-bar button,
+.lurems-tax-card button,
+.lurems-video-controls button,
+.lurems-editor-toolbar button {
+  border: 1px solid #c8ede8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #2a6c63;
+  min-height: 42px;
+  padding: 0 12px;
+  font: 700 12px "Poppins", sans-serif;
+}
+
+.lurems-calendar-strip button.is-selected,
+.lurems-slot-picker button.is-selected,
+.lurems-clinical-tabs button.is-selected,
+.lurems-mood-selector button.is-selected {
+  background: #7b6fd0;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.lurems-agenda-board {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 150px;
+  gap: 12px;
+  min-height: 340px;
+}
+
+.lurems-time-rail,
+.lurems-agenda-column {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.lurems-time-rail span {
+  color: #7bada8;
+  font: 600 11px "DM Mono", monospace;
+}
+
+.lurems-agenda-column {
+  border-radius: 12px;
+  background: repeating-linear-gradient(0deg, #ffffff 0 54px, #eff9f7 55px 56px);
+  border: 1px solid #c8ede8;
+  padding: 8px;
+}
+
+.lurems-session-block {
+  border-radius: 10px;
+  padding: 12px;
+  color: #ffffff;
+  background: #7b6fd0;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.lurems-session-block.is-soft {
+  background: #eff9f7;
+  color: #1a3a38;
+  border: 1px dashed #7bada8;
+}
+
+.lurems-session-block span,
+.lurems-agenda-summary span {
+  font-size: 11px;
+  opacity: 0.82;
+}
+
+.lurems-agenda-summary {
+  border: 1px solid #c8ede8;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+}
+
+.lurems-ring-progress {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(#7b6fd0 0 78%, #eff9f7 78% 100%);
+  color: #1a3a38;
+}
+
+.lurems-ring-progress b {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+}
+
+.kanban-layout {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lurems-kanban-column {
+  padding: 14px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.lurems-kanban-column h3,
+.lurems-slot-picker h3,
+.lurems-note-editor h3 {
+  margin: 0;
+  color: #1a3a38;
+  font-size: 14px;
+}
+
+.lurems-kanban-column article {
+  border-radius: 10px;
+  background: #f5fafa;
+  padding: 12px;
+  display: grid;
+  gap: 5px;
+}
+
+.lurems-kanban-column article strong,
+.lurems-therapist-grid strong,
+.lurems-clinical-summary strong,
+.lurems-resource-grid strong,
+.lurems-tax-card strong,
+.lurems-session-notepad strong,
+.lurems-task-sidebar strong {
+  color: #1a3a38;
+  font-size: 13px;
+}
+
+.lurems-kanban-column article span,
+.lurems-therapist-grid span,
+.lurems-clinical-summary span,
+.lurems-resource-grid span,
+.lurems-tax-card span {
+  color: #7bada8;
+  font-size: 11px;
+}
+
+.lurems-kanban-column article b,
+.lurems-score {
+  color: #4caf88;
+  font: 700 11px "DM Mono", monospace;
+}
+
+.modal-layout {
+  position: relative;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(26, 58, 56, 0.05);
+}
+
+.lurems-page-underlay {
+  width: 100%;
+  filter: blur(0.5px);
+  opacity: 0.55;
+  display: grid;
+  gap: 10px;
+}
+
+.lurems-question-row {
+  min-height: 72px;
+  border: 1px solid #c8ede8;
+  border-radius: 12px;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+.lurems-question-row span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #c8ede8;
+  color: #2a6c63;
+  font: 800 12px "DM Mono", monospace;
+}
+
+.lurems-question-row strong {
+  color: #1a3a38;
+  font-size: 13px;
+}
+
+.lurems-question-row small {
+  grid-column: 2;
+  color: #7bada8;
+}
+
+.lurems-modal-card {
+  position: absolute;
+  width: min(420px, calc(100% - 42px));
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+  box-shadow: 0 24px 70px rgba(26, 58, 56, 0.24);
+}
+
+.lurems-modal-card > button {
+  justify-self: end;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 0;
+  background: #eff9f7;
+  color: #2a6c63;
+}
+
+.lurems-range-field {
+  border-radius: 10px;
+  background: #f5fafa;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  color: #1a3a38;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lurems-range-field i {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: 999px;
+  background: #45a99a;
+}
+
+.marketplace-layout {
+  grid-template-rows: auto 1fr auto;
+}
+
+.lurems-filter-bar {
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #c8ede8;
+  padding: 10px;
+}
+
+.lurems-therapist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lurems-therapist-grid article {
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.lurems-therapist-grid article.is-featured {
+  background: linear-gradient(180deg, #ffffff, #eff9f7);
+  border-color: #45a99a;
+}
+
+.lurems-compare-tray,
+.lurems-assignment-bar {
+  min-height: 58px;
+  border-radius: 12px;
+  background: #1a3a38;
+  color: #ffffff;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lurems-compare-tray span,
+.lurems-assignment-bar span {
+  color: #c8ede8;
+  font-size: 12px;
+}
+
+.reschedule-layout {
+  grid-template-columns: 0.9fr 1fr;
+  grid-template-areas:
+    "current slots"
+    "confirm slots";
+}
+
+.lurems-reschedule-current {
+  grid-area: current;
+  padding: 18px;
+}
+
+.lurems-reschedule-current strong,
+.lurems-payment-card strong,
+.lurems-billing-total strong,
+.lurems-card-preview strong {
+  display: block;
+  color: #1a3a38;
+  font-size: 26px;
+  line-height: 1;
+  margin: 10px 0;
+}
+
+.lurems-slot-picker {
+  grid-area: slots;
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.lurems-confirm-panel {
+  grid-area: confirm;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.lurems-confirm-panel div,
+.lurems-invoice-list div,
+.lurems-payout-table div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  color: #1a3a38;
+  font-size: 12px;
+}
+
+.journal-layout {
+  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-rows: auto 1fr;
+}
+
+.lurems-mood-selector {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.lurems-journal-editor {
+  padding: 20px;
+  min-height: 250px;
+}
+
+.lurems-mood-map {
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.lurems-mood-map div {
+  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.lurems-mood-map i {
+  flex: 1;
+  min-height: 34px;
+  border-radius: 999px 999px 8px 8px;
+  background: linear-gradient(180deg, #72cbbf, #45a99a);
+  color: #ffffff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  font: 700 11px "DM Mono", monospace;
+}
+
+.payment-layout {
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-areas:
+    "pay card"
+    "invoice invoice";
+}
+
+.lurems-payment-card {
+  grid-area: pay;
+  padding: 22px;
+}
+
+.lurems-card-preview {
+  grid-area: card;
+  min-height: 180px;
+  padding: 20px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(242, 201, 76, 0.35), transparent 28%),
+    linear-gradient(135deg, #1a3a38, #45a99a);
+}
+
+.lurems-card-preview span,
+.lurems-card-preview small {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lurems-card-preview strong {
+  color: #ffffff;
+}
+
+.lurems-invoice-list {
+  grid-area: invoice;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.clinical-layout {
+  grid-template-rows: auto auto 1fr;
+}
+
+.lurems-clinical-summary {
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(123, 111, 208, 0.12), rgba(255, 255, 255, 0.92));
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lurems-clinical-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lurems-clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lurems-clinical-grid article {
+  padding: 16px;
+}
+
+.session-room-layout {
+  grid-template-columns: 1.25fr 0.75fr;
+}
+
+.lurems-video-room {
+  min-height: 340px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(123, 111, 208, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a3a38, #0b2523);
+  position: relative;
+}
+
+.lurems-video-person {
+  height: 100%;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+}
+
+.lurems-video-person.is-small {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 128px;
+  height: 88px;
+  background: rgba(123, 111, 208, 0.55);
+}
+
+.lurems-video-controls {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+
+.lurems-session-notepad {
+  padding: 18px;
+}
+
+.notes-layout {
+  grid-template-columns: 1fr 220px;
+}
+
+.lurems-note-editor {
+  padding: 18px;
+}
+
+.lurems-note-editor p {
+  border-radius: 10px;
+  background: #f5fafa;
+  color: #426460;
+  padding: 12px;
+  font-size: 12px;
+}
+
+.lurems-task-sidebar {
+  padding: 16px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.lurems-task-sidebar label {
+  display: flex;
+  gap: 8px;
+  color: #426460;
+  font-size: 12px;
+}
+
+.library-layout {
+  grid-template-rows: auto 1fr auto;
+}
+
+.lurems-resource-search {
+  min-height: 58px;
+  padding: 12px 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.lurems-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lurems-resource-grid article {
+  min-height: 150px;
+  padding: 14px;
+  display: grid;
+  align-content: space-between;
+}
+
+.lurems-resource-grid i {
+  width: max-content;
+  border-radius: 999px;
+  background: rgba(123, 111, 208, 0.12);
+  color: #7b6fd0;
+  padding: 4px 8px;
+  font: 700 10px "DM Mono", monospace;
+}
+
+.billing-layout {
+  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-areas:
+    "total table"
+    "tax table";
+}
+
+.lurems-billing-total {
+  grid-area: total;
+  padding: 22px;
+}
+
+.lurems-payout-table {
+  grid-area: table;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.lurems-payout-table div {
+  grid-template-columns: 1fr auto auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eff9f7;
+}
+
+.lurems-payout-table em {
+  border-radius: 999px;
+  background: rgba(123, 111, 208, 0.1);
+  color: #7b6fd0;
+  padding: 4px 8px;
+  font-style: normal;
+  font: 700 10px "DM Mono", monospace;
+}
+
+.lurems-tax-card {
+  grid-area: tax;
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
 @media (max-width: 880px) {
   .lurems-app-chrome,
   .lurems-dashboard-body {
     grid-template-columns: 1fr;
+  }
+
+  .profile-layout,
+  .lurems-agenda-board,
+  .kanban-layout,
+  .reschedule-layout,
+  .journal-layout,
+  .payment-layout,
+  .clinical-layout,
+  .session-room-layout,
+  .notes-layout,
+  .library-layout,
+  .billing-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+  }
+
+  .lurems-profile-hero,
+  .lurems-form-grid,
+  .lurems-therapist-grid,
+  .lurems-clinical-grid,
+  .lurems-resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lurems-profile-hero,
+  .lurems-privacy-panel,
+  .lurems-reschedule-current,
+  .lurems-slot-picker,
+  .lurems-confirm-panel,
+  .lurems-payment-card,
+  .lurems-card-preview,
+  .lurems-invoice-list,
+  .lurems-billing-total,
+  .lurems-payout-table,
+  .lurems-tax-card {
+    grid-area: auto;
   }
 
   .lurems-app-sidebar {
@@ -531,6 +1383,14 @@ body.lurems-webapps-active .lurems-webapps-host {
 
   .lurems-dashboard-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lurems-agenda-board {
+    min-height: auto;
+  }
+
+  .lurems-agenda-summary {
+    min-height: 160px;
   }
 }
 

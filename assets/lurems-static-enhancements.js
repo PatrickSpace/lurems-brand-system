@@ -2,7 +2,7 @@
   const BUSINESS_CARD_SRC = "./assets/lurems-business-card-haz-luz.png";
   const MARK_SRC = "./assets/lurems-isotipo-transparent-CGVbIjAh.png";
   const WEB_APPS_TAB_LABEL = "16 — Web Apps";
-  const WEB_APPS_CONTENT_VERSION = "20260709-webapps-13";
+  const WEB_APPS_CONTENT_VERSION = "20260709-webapps-varied-2";
 
   function textOf(node) {
     return (node.textContent || "").trim();
@@ -157,45 +157,26 @@
     navList.appendChild(button);
   }
 
-  function metricCard(label, value, note) {
+  function actionButton(label, active) {
+    return `<button class="${active ? "lurems-primary-button" : "lurems-soft-button"}" type="button">${label}</button>`;
+  }
+
+  function tag(label) {
+    return `<span class="lurems-chip">${label}</span>`;
+  }
+
+  function field(label, value, type) {
     return `
-      <div class="lurems-info-card">
+      <label class="lurems-form-field ${type || ""}">
         <span>${label}</span>
         <strong>${value}</strong>
-        <small>${note}</small>
-      </div>
+      </label>
     `;
   }
 
-  function sidebarItem(icon, label, active) {
+  function mockShell({ modifier, eyebrow, title, button, menu, noteTitle, note, body, captionTitle, captionText, token, canvasClass }) {
     return `
-      <div class="lurems-sidebar-item${active ? " is-active" : ""}">
-        <span class="lurems-sidebar-icon">${icon}</span>
-        <span>${label}</span>
-      </div>
-    `;
-  }
-
-  function listRow(initials, title, subtitle, status) {
-    return `
-      <div class="lurems-list-row">
-        <div class="lurems-avatar">${initials}</div>
-        <div>
-          <strong>${title}</strong>
-          <span>${subtitle}</span>
-        </div>
-        <span class="lurems-status-pill">${status}</span>
-      </div>
-    `;
-  }
-
-  function chartBars(values) {
-    return values.map((height) => `<div class="lurems-chart-bar" style="height: ${height}%"></div>`).join("");
-  }
-
-  function appExample({ modifier, eyebrow, title, button, menu, noteTitle, note, metrics, chartTitle, bars, rows, captionTitle, captionText, token }) {
-    return `
-      <section class="lurems-app-example ${modifier || ""}">
+      <section class="lurems-app-example lurems-variant-mockup ${modifier || ""}" data-case="${token}">
         <div class="lurems-app-chrome">
           <aside class="lurems-app-sidebar">
             <div class="lurems-sidebar-brand">
@@ -222,20 +203,8 @@
                 <button class="lurems-primary-button" type="button">${button}</button>
               </div>
             </div>
-            <div class="lurems-dashboard-cards">
-              ${metrics.map((item) => metricCard(item[0], item[1], item[2])).join("")}
-            </div>
-            <div class="lurems-dashboard-body">
-              <div class="lurems-panel">
-                <h3>${chartTitle}</h3>
-                <div class="lurems-chart">${chartBars(bars)}</div>
-              </div>
-              <div class="lurems-panel">
-                <h3>Actividad reciente</h3>
-                <div class="lurems-list">
-                  ${rows.map((item) => listRow(item[0], item[1], item[2], item[3])).join("")}
-                </div>
-              </div>
+            <div class="lurems-variant-canvas ${canvasClass || ""}">
+              ${body}
             </div>
           </div>
         </div>
@@ -250,114 +219,191 @@
     `;
   }
 
-  function webAppsContent() {
+  function variedWebAppsContent() {
     return `
       <div class="lurems-webapps-page">
         <header class="lurems-webapps-header">
           <div class="lurems-webapps-number">16</div>
           <div>
             <h1>Web Apps</h1>
-            <p>Ejemplos de interfaces SaaS para Lurems con menú lateral, dashboards y cards informativas.</p>
+            <p>Variantes de interfaces para Lurems: perfiles, agendas, modales, pagos, diarios emocionales y flujos clínicos con componentes distintos.</p>
           </div>
         </header>
         <div class="lurems-webapps-grid">
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
-            title: "Panel de bienestar",
-            button: "Nueva sesión",
-            menu: [["IN", "Inicio"], ["SE", "Sesiones"], ["PL", "Plan"], ["MS", "Mensajes"], ["PR", "Perfil"]],
-            noteTitle: "Próxima sesión",
-            note: "Hoy 16:00 con la Dra. Sofía Martínez.",
-            metrics: [["Sesiones", "4", "este mes"], ["Check-ins", "12", "racha activa"], ["Objetivos", "68%", "avance"], ["Mensajes", "3", "sin leer"]],
-            chartTitle: "Estado semanal",
-            bars: [48, 58, 44, 72, 68, 82, 76],
-            rows: [["SM", "Dra. Sofía Martínez", "Sesión individual", "16:00"], ["AI", "Asistente Lurems", "Resumen disponible", "nuevo"], ["PL", "Plan terapéutico", "2 tareas pendientes", "hoy"]],
-            captionTitle: "Portal del paciente",
-            captionText: "Dashboard sereno, cards de progreso y navegación enfocada en acompañamiento.",
-            token: "patient.dashboard"
+            title: "Perfil de acompañamiento",
+            button: "Guardar cambios",
+            menu: [["PR", "Perfil"], ["CO", "Contacto"], ["PV", "Privacidad"], ["SE", "Sesiones"], ["AY", "Ayuda"]],
+            noteTitle: "Perfil verificado",
+            note: "Los datos sensibles se editan con confirmación antes de compartirse.",
+            canvasClass: "profile-layout",
+            body: `
+              <div class="lurems-profile-hero">
+                <div class="lurems-profile-avatar">MP</div>
+                <div>
+                  <span>Cuenta paciente</span>
+                  <h3>Mariana Paredes</h3>
+                  <p>Busca apoyo para ansiedad, sueño y adaptación a cambios laborales.</p>
+                  <div class="lurems-chip-row">${tag("Terapia online")}${tag("TCC")}${tag("Tardes")}</div>
+                </div>
+              </div>
+              <div class="lurems-form-grid">
+                ${field("Nombre visible", "Mariana Paredes")}
+                ${field("Correo", "mariana@lurems.lat")}
+                ${field("Zona horaria", "Lima, GMT-5")}
+                ${field("Contacto de emergencia", "Pendiente", "is-warning")}
+              </div>
+              <div class="lurems-privacy-panel">
+                <strong>Control de privacidad</strong>
+                <p>El paciente decide qué datos comparte con su psicólogo antes del primer encuentro.</p>
+                <div class="lurems-toggle-row"><span>Compartir diario emocional</span><i></i></div>
+                <div class="lurems-toggle-row is-off"><span>Compartir historial de pagos</span><i></i></div>
+              </div>
+            `,
+            captionTitle: "Perfil de usuario",
+            captionText: "Pantalla de identidad y preferencias con formularios, chips y controles de privacidad.",
+            token: "patient.profile"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
-            title: "Workspace profesional",
-            button: "Agregar nota",
-            menu: [["AG", "Agenda"], ["PA", "Pacientes"], ["NT", "Notas"], ["FI", "Finanzas"], ["RE", "Recursos"]],
-            noteTitle: "Bloque clínico",
-            note: "5 sesiones confirmadas y 2 notas por cerrar.",
-            metrics: [["Agenda", "5", "hoy"], ["Pacientes", "38", "activos"], ["Notas", "2", "pendientes"], ["Rating", "4.9", "promedio"]],
-            chartTitle: "Carga de sesiones",
-            bars: [62, 76, 84, 58, 72, 38, 24],
-            rows: [["AG", "Ana García", "Seguimiento TCC", "10:30"], ["JV", "Jorge Vera", "Primera sesión", "12:00"], ["LC", "Lucía Campos", "Nota clínica", "draft"]],
-            captionTitle: "Panel para psicólogos",
-            captionText: "El morado separa la experiencia profesional y organiza agenda, pacientes y notas.",
-            token: "psychologist.workspace"
+            title: "Agenda clínica diaria",
+            button: "Bloquear hora",
+            menu: [["AG", "Agenda"], ["PA", "Pacientes"], ["NT", "Notas"], ["DI", "Disponibilidad"], ["RE", "Reportes"]],
+            noteTitle: "Carga del día",
+            note: "5 sesiones, 1 primera entrevista y 2 espacios administrativos.",
+            canvasClass: "agenda-layout",
+            body: `
+              <div class="lurems-calendar-strip">
+                <button>Lun<br><strong>06</strong></button><button class="is-selected">Mar<br><strong>07</strong></button><button>Mié<br><strong>08</strong></button><button>Jue<br><strong>09</strong></button><button>Vie<br><strong>10</strong></button>
+              </div>
+              <div class="lurems-agenda-board">
+                <div class="lurems-time-rail"><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span></div>
+                <div class="lurems-agenda-column">
+                  <div class="lurems-session-block is-purple" style="grid-row: 1 / span 2;"><strong>Ana García</strong><span>Seguimiento TCC · online</span></div>
+                  <div class="lurems-session-block is-soft" style="grid-row: 3 / span 1;"><strong>Bloque administrativo</strong><span>Notas y firma clínica</span></div>
+                  <div class="lurems-session-block is-purple" style="grid-row: 5 / span 2;"><strong>Jorge Vera</strong><span>Primera sesión · 60 min</span></div>
+                </div>
+                <aside class="lurems-agenda-summary">
+                  <strong>Disponibilidad</strong>
+                  <span>2 slots libres</span>
+                  <div class="lurems-ring-progress"><b>78%</b></div>
+                </aside>
+              </div>
+            `,
+            captionTitle: "Agenda profesional",
+            captionText: "Calendario por horas, bloques de sesión y resumen de disponibilidad para psicólogos.",
+            token: "psychologist.agenda"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-ops",
             eyebrow: "Operaciones",
-            title: "Dashboard de matching",
-            button: "Revisar cola",
-            menu: [["OV", "Overview"], ["MT", "Matching"], ["QA", "Calidad"], ["CO", "Contenido"], ["SU", "Soporte"]],
-            noteTitle: "Calidad clínica",
-            note: "Indicadores estables dentro del rango definido.",
-            metrics: [["Matches", "128", "semana"], ["Tiempo", "7m", "promedio"], ["NPS", "72", "salud"], ["Alertas", "4", "prioridad"]],
-            chartTitle: "Demanda por canal",
-            bars: [38, 52, 48, 66, 78, 86, 64],
-            rows: [["MX", "Match pendiente", "Ansiedad / disponibilidad", "alta"], ["QA", "Revisión de perfil", "Documento vencido", "medio"], ["CS", "Caso soporte", "Cambio de profesional", "nuevo"]],
+            title: "Cola de matching",
+            button: "Asignar match",
+            menu: [["MT", "Matching"], ["SE", "Señales"], ["QA", "Calidad"], ["AL", "Alertas"], ["SO", "Soporte"]],
+            noteTitle: "Regla activa",
+            note: "Priorizar especialidad, horario compatible y continuidad terapéutica.",
+            canvasClass: "kanban-layout",
+            body: `
+              <div class="lurems-kanban-column">
+                <h3>Nuevos</h3>
+                <article><strong>Ansiedad social</strong><span>Paciente · tardes · online</span><b>92% match</b></article>
+                <article><strong>Duelo reciente</strong><span>Paciente · fines de semana</span><b>84% match</b></article>
+              </div>
+              <div class="lurems-kanban-column">
+                <h3>En revisión</h3>
+                <article><strong>Estrés laboral</strong><span>Validar idioma y disponibilidad</span><b>3 opciones</b></article>
+                <article><strong>Autoestima</strong><span>Psicóloga sugerida: Sofía M.</span><b>alta</b></article>
+              </div>
+              <div class="lurems-kanban-column">
+                <h3>Confirmados</h3>
+                <article><strong>Primera cita</strong><span>Viernes 18:00 · notificado</span><b>ok</b></article>
+                <article><strong>Cambio de terapeuta</strong><span>Motivo: horario</span><b>cerrado</b></article>
+              </div>
+            `,
             captionTitle: "Panel operativo",
-            captionText: "Vista densa para equipos internos con métricas, colas y señales de calidad.",
-            token: "ops.dashboard"
+            captionText: "Kanban interno para colas de matching, reglas clínicas y resolución de casos.",
+            token: "ops.matching"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
-            title: "Onboarding terapéutico",
-            button: "Continuar",
-            menu: [["BI", "Bienvenida"], ["MO", "Motivos"], ["PR", "Preferencias"], ["HO", "Horarios"], ["RE", "Resumen"]],
-            noteTitle: "Progreso inicial",
-            note: "El paciente completa preferencias antes del primer match.",
-            metrics: [["Pasos", "3/5", "completados"], ["Afinidad", "82%", "pre-match"], ["Tiempo", "6m", "promedio"], ["Privacidad", "100%", "activo"]],
-            chartTitle: "Necesidades declaradas",
-            bars: [74, 62, 48, 68, 42, 56, 38],
-            rows: [["AN", "Ansiedad", "Motivo principal", "alto"], ["HO", "Horario tarde", "Preferencia activa", "ok"], ["MO", "Modalidad online", "Sesión remota", "ok"]],
-            captionTitle: "Flujo de onboarding",
-            captionText: "Pantalla para capturar contexto, preferencias y señales de compatibilidad del paciente.",
-            token: "patient.onboarding"
+            title: "Actualizar motivo de consulta",
+            button: "Abrir modal",
+            menu: [["FO", "Formulario"], ["MO", "Motivos"], ["SI", "Síntomas"], ["PR", "Preferencias"], ["RE", "Resumen"]],
+            noteTitle: "Edición segura",
+            note: "El modal confirma cambios antes de actualizar el expediente del paciente.",
+            canvasClass: "modal-layout",
+            body: `
+              <div class="lurems-page-underlay">
+                <div class="lurems-question-row"><span>1</span><strong>¿Qué te trae a Lurems?</strong><small>Ansiedad, sueño, estrés</small></div>
+                <div class="lurems-question-row"><span>2</span><strong>¿Qué esperas lograr?</strong><small>Mejorar hábitos y claridad</small></div>
+                <div class="lurems-question-row"><span>3</span><strong>Preferencia de terapeuta</strong><small>Experiencia en TCC</small></div>
+              </div>
+              <div class="lurems-modal-card">
+                <button type="button">x</button>
+                <strong>Actualizar formulario</strong>
+                <p>Indica si el motivo principal cambió para recalibrar tu match terapéutico.</p>
+                ${field("Motivo principal", "Ansiedad y sueño")}
+                <div class="lurems-range-field"><span>Intensidad esta semana</span><b>7/10</b><i style="width:70%"></i></div>
+                <div class="lurems-modal-actions">${actionButton("Cancelar", false)}${actionButton("Actualizar", true)}</div>
+              </div>
+            `,
+            captionTitle: "Modal de actualización",
+            captionText: "Formulario emergente sobre una página existente para actualizar señales clínicas.",
+            token: "patient.form-modal"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
             title: "Explorar psicólogos",
-            button: "Filtrar",
+            button: "Ver perfil",
             menu: [["EX", "Explorar"], ["FI", "Filtros"], ["FA", "Favoritos"], ["CO", "Comparar"], ["AG", "Agendar"]],
             noteTitle: "Match sugerido",
             note: "3 profesionales recomendados según necesidad y disponibilidad.",
-            metrics: [["Matches", "9", "compatibles"], ["Disponibles", "6", "esta semana"], ["Especialidad", "TCC", "principal"], ["Favoritos", "2", "guardados"]],
-            chartTitle: "Compatibilidad por criterio",
-            bars: [88, 76, 64, 82, 58, 70, 74],
-            rows: [["SM", "Sofía Martínez", "Ansiedad y autoestima", "94%"], ["JV", "Javier Vega", "Estrés laboral", "89%"], ["LC", "Lucía Campos", "Duelo y cambios", "86%"]],
+            canvasClass: "marketplace-layout",
+            body: `
+              <div class="lurems-filter-bar">${tag("Ansiedad")}${tag("Online")}${tag("Tardes")}${tag("TCC")}<button>Más filtros</button></div>
+              <div class="lurems-therapist-grid">
+                <article class="is-featured"><div class="lurems-profile-avatar">SM</div><strong>Sofía Martínez</strong><span>Ansiedad · autoestima</span><div class="lurems-score">94%</div><p>Disponible jueves 18:00</p></article>
+                <article><div class="lurems-profile-avatar">JV</div><strong>Javier Vega</strong><span>Estrés laboral</span><div class="lurems-score">89%</div><p>Disponible viernes 09:30</p></article>
+                <article><div class="lurems-profile-avatar">LC</div><strong>Lucía Campos</strong><span>Duelo y cambios</span><div class="lurems-score">86%</div><p>Disponible sábado 11:00</p></article>
+              </div>
+              <div class="lurems-compare-tray"><strong>Comparar favoritos</strong><span>Sofía M. vs Javier V.</span><button>Comparar</button></div>
+            `,
             captionTitle: "Marketplace de psicólogos",
-            captionText: "Vista de descubrimiento con cards, filtros y señales claras de compatibilidad.",
+            captionText: "Exploración con filtros, cards de especialistas, match score y bandeja de comparación.",
             token: "patient.marketplace"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
-            title: "Agenda de sesiones",
-            button: "Reservar",
+            title: "Reagendar una cita",
+            button: "Confirmar",
             menu: [["CA", "Calendario"], ["SE", "Sesiones"], ["PA", "Pagos"], ["RE", "Recordatorios"], ["HI", "Historial"]],
             noteTitle: "Recordatorio",
             note: "Próxima sesión mañana a las 18:30.",
-            metrics: [["Próxima", "18:30", "mañana"], ["Sesiones", "8", "total"], ["Reagendas", "1", "mes"], ["Pagos", "0", "pendientes"]],
-            chartTitle: "Frecuencia mensual",
-            bars: [38, 52, 52, 66, 52, 66, 80],
-            rows: [["SM", "Sesión individual", "Dra. Sofía Martínez", "mañana"], ["PG", "Pago confirmado", "Tarjeta terminada 0921", "ok"], ["RE", "Recordatorio SMS", "Activado", "on"]],
-            captionTitle: "Calendario del paciente",
-            captionText: "Agenda simple para reservar, reagendar y recordar sesiones sin fricción.",
-            token: "patient.schedule"
+            canvasClass: "reschedule-layout",
+            body: `
+              <div class="lurems-reschedule-current"><span>Cita actual</span><strong>Miércoles 10 · 18:30</strong><p>Dra. Sofía Martínez · videollamada</p></div>
+              <div class="lurems-slot-picker">
+                <h3>Elige nuevo horario</h3>
+                <button>Jue 11 · 17:00</button><button class="is-selected">Jue 11 · 19:00</button><button>Vie 12 · 08:30</button><button>Sáb 13 · 11:00</button>
+              </div>
+              <div class="lurems-confirm-panel">
+                <strong>Resumen</strong>
+                <div><span>Nueva fecha</span><b>Jue 11, 19:00</b></div>
+                <div><span>Política</span><b>Sin penalidad</b></div>
+                <div><span>Recordatorio</span><b>1 hora antes</b></div>
+              </div>
+            `,
+            captionTitle: "Flujo de reagenda",
+            captionText: "Selector de horarios, cita actual y panel de confirmación para cambiar una sesión.",
+            token: "patient.reschedule"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
             title: "Diario emocional",
@@ -365,31 +411,45 @@
             menu: [["HO", "Hoy"], ["DI", "Diario"], ["ES", "Estado"], ["PA", "Patrones"], ["CO", "Compartir"]],
             noteTitle: "Insight semanal",
             note: "El estado mejora cuando se completan tareas de respiración.",
-            metrics: [["Ánimo", "7.8", "promedio"], ["Registros", "18", "mes"], ["Patrones", "3", "detectados"], ["Compartido", "5", "con terapeuta"]],
-            chartTitle: "Evolución emocional",
-            bars: [46, 52, 58, 49, 64, 72, 78],
-            rows: [["AN", "Ansiedad baja", "Después de respiración", "nuevo"], ["SU", "Sueño estable", "7 horas promedio", "ok"], ["GR", "Gratitud", "3 notas positivas", "hoy"]],
+            canvasClass: "journal-layout",
+            body: `
+              <div class="lurems-mood-selector"><button>Calma</button><button class="is-selected">Ansiedad</button><button>Energía</button><button>Sueño</button></div>
+              <div class="lurems-journal-editor">
+                <span>Entrada de hoy</span>
+                <p>Me sentí más tranquilo después de caminar y hacer el ejercicio de respiración. Quiero hablar de la llamada del trabajo.</p>
+              </div>
+              <div class="lurems-mood-map">
+                <strong>Mapa emocional</strong>
+                <div>${["L", "M", "M", "J", "V", "S", "D"].map((day, index) => `<i style="height:${[42, 58, 36, 74, 66, 48, 82][index]}%">${day}</i>`).join("")}</div>
+              </div>
+            `,
             captionTitle: "Registro emocional",
-            captionText: "Herramienta para seguimiento de ánimo y conversación informada en sesión.",
+            captionText: "Diario con selector de estado, editor narrativo y visualización de patrones semanales.",
             token: "patient.journal"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-patient",
             eyebrow: "Paciente",
-            title: "Plan terapéutico",
-            button: "Completar tarea",
-            menu: [["PL", "Plan"], ["TA", "Tareas"], ["ME", "Metas"], ["RE", "Recursos"], ["AV", "Avance"]],
-            noteTitle: "Meta activa",
-            note: "Practicar exposición gradual 3 veces esta semana.",
-            metrics: [["Avance", "64%", "plan"], ["Tareas", "5", "activas"], ["Recursos", "12", "asignados"], ["Racha", "9d", "constante"]],
-            chartTitle: "Cumplimiento de tareas",
-            bars: [28, 44, 58, 54, 68, 76, 84],
-            rows: [["EX", "Exposición gradual", "2 de 3 completadas", "hoy"], ["RE", "Audio respiración", "Recurso asignado", "nuevo"], ["ME", "Meta semanal", "Revisar en sesión", "vie"]],
-            captionTitle: "Plan de tratamiento del paciente",
-            captionText: "Cards de tareas y progreso para mantener continuidad entre sesiones.",
-            token: "patient.treatment-plan"
+            title: "Página de pagos",
+            button: "Pagar sesión",
+            menu: [["PA", "Pagos"], ["TA", "Tarjetas"], ["RE", "Recibos"], ["BO", "Bonos"], ["AY", "Ayuda"]],
+            noteTitle: "Pago pendiente",
+            note: "La sesión del jueves queda reservada al confirmar el pago.",
+            canvasClass: "payment-layout",
+            body: `
+              <div class="lurems-payment-card"><span>Saldo a pagar</span><strong>S/ 180.00</strong><p>Sesión individual · 50 minutos</p>${actionButton("Usar tarjeta guardada", true)}</div>
+              <div class="lurems-card-preview"><span>VISA</span><strong>•••• 0921</strong><small>Mariana Paredes</small></div>
+              <div class="lurems-invoice-list">
+                <div><span>Sesión</span><b>S/ 180.00</b></div>
+                <div><span>Descuento Lurems</span><b>- S/ 20.00</b></div>
+                <div><span>Total</span><b>S/ 160.00</b></div>
+              </div>
+            `,
+            captionTitle: "Checkout del paciente",
+            captionText: "Pantalla financiera con tarjeta, desglose de cobro y acción principal de pago.",
+            token: "patient.payments"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
             title: "Ficha clínica",
@@ -397,31 +457,40 @@
             menu: [["FI", "Ficha"], ["EV", "Evolución"], ["SE", "Sesiones"], ["DO", "Documentos"], ["RI", "Riesgo"]],
             noteTitle: "Resumen clínico",
             note: "Paciente en semana 6, adherencia estable y riesgo bajo.",
-            metrics: [["Sesiones", "6", "proceso"], ["Adherencia", "82%", "alta"], ["Riesgo", "Bajo", "actual"], ["Notas", "14", "historial"]],
-            chartTitle: "Indicadores clínicos",
-            bars: [58, 62, 66, 72, 70, 76, 82],
-            rows: [["AG", "Ana García", "Plan TCC activo", "estable"], ["NT", "Nota evolutiva", "Pendiente de firma", "draft"], ["DO", "Consentimiento", "Documento vigente", "ok"]],
+            canvasClass: "clinical-layout",
+            body: `
+              <div class="lurems-clinical-summary">
+                <div class="lurems-profile-avatar">AG</div><div><strong>Ana García</strong><span>Semana 6 · TCC · riesgo bajo</span></div>
+              </div>
+              <div class="lurems-clinical-tabs"><button class="is-selected">Evolución</button><button>Riesgo</button><button>Documentos</button></div>
+              <div class="lurems-clinical-grid">
+                <article><span>Objetivo activo</span><strong>Exposición gradual</strong><p>2 tareas completadas esta semana.</p></article>
+                <article><span>Indicadores</span><strong>Adherencia 82%</strong><p>Asiste y registra diario con constancia.</p></article>
+                <article><span>Alertas</span><strong>Sin señales críticas</strong><p>Revisar sueño y ansiedad anticipatoria.</p></article>
+              </div>
+            `,
             captionTitle: "Ficha del paciente",
-            captionText: "Vista clínica con historial, riesgo, documentos y evolución del proceso.",
+            captionText: "Resumen clínico con tabs, estado del caso y tarjetas de evolución para terapeutas.",
             token: "psychologist.patient-record"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
-            title: "Agenda clínica",
-            button: "Bloquear horario",
-            menu: [["HO", "Horarios"], ["AG", "Agenda"], ["DI", "Disponibilidad"], ["RE", "Reservas"], ["AU", "Ausencias"]],
-            noteTitle: "Día productivo",
-            note: "7 espacios reservados, 1 bloque administrativo y 2 disponibles.",
-            metrics: [["Reservas", "7", "hoy"], ["Disponibles", "2", "slots"], ["Canceladas", "0", "hoy"], ["Ocupación", "78%", "semana"]],
-            chartTitle: "Ocupación semanal",
-            bars: [72, 88, 78, 84, 68, 42, 28],
-            rows: [["10", "10:30 Ana García", "Seguimiento", "online"], ["12", "12:00 Jorge Vera", "Primera sesión", "online"], ["16", "16:00 Bloque admin", "Notas clínicas", "focus"]],
-            captionTitle: "Gestión de agenda profesional",
-            captionText: "Calendario operativo para controlar disponibilidad, reservas y bloques clínicos.",
-            token: "psychologist.schedule"
+            title: "Panel de videollamada",
+            button: "Iniciar sesión",
+            menu: [["VI", "Video"], ["CH", "Chat"], ["NO", "Notas"], ["RE", "Recursos"], ["SE", "Sesión"]],
+            noteTitle: "Sala lista",
+            note: "El paciente recibirá un recordatorio 10 minutos antes.",
+            canvasClass: "session-room-layout",
+            body: `
+              <div class="lurems-video-room"><div class="lurems-video-person">Paciente</div><div class="lurems-video-person is-small">Psicólogo</div><div class="lurems-video-controls"><button>Mic</button><button>Cam</button><button>Salir</button></div></div>
+              <aside class="lurems-session-notepad"><strong>Notas privadas</strong><p>Explorar ansiedad anticipatoria antes de reuniones. Preguntar por sueño.</p><span>Plantilla: TCC breve</span></aside>
+            `,
+            captionTitle: "Sala de sesión",
+            captionText: "Contexto de videollamada con controles, ventana secundaria y notas privadas.",
+            token: "psychologist.video-session"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
             title: "Notas de sesión",
@@ -429,15 +498,22 @@
             menu: [["NO", "Notas"], ["PL", "Plantillas"], ["OB", "Objetivos"], ["TA", "Tareas"], ["EX", "Exportar"]],
             noteTitle: "Nota en edición",
             note: "La plantilla SOAP está lista para revisión final.",
-            metrics: [["Borradores", "3", "abiertos"], ["Firmadas", "21", "mes"], ["Plantillas", "8", "uso"], ["Tareas", "5", "asignadas"]],
-            chartTitle: "Notas completadas",
-            bars: [42, 56, 62, 74, 68, 80, 88],
-            rows: [["SO", "SOAP ansiedad", "Borrador guardado", "draft"], ["TA", "Tarea asignada", "Respiración 4-7-8", "nuevo"], ["EX", "Exportación PDF", "Lista para descarga", "ok"]],
+            canvasClass: "notes-layout",
+            body: `
+              <div class="lurems-note-editor">
+                <div class="lurems-editor-toolbar"><button>B</button><button>I</button><button>Lista</button><button>Plantilla SOAP</button></div>
+                <h3>Nota evolutiva · Ana García</h3>
+                <p><strong>S:</strong> Reporta ansiedad moderada antes de exposición laboral.</p>
+                <p><strong>O:</strong> Afecto congruente, participa en ejercicios.</p>
+                <p><strong>P:</strong> Repetir respiración y registrar pensamientos automáticos.</p>
+              </div>
+              <div class="lurems-task-sidebar"><strong>Tareas asignadas</strong><label><input checked type="checkbox"> Diario 3 días</label><label><input type="checkbox"> Audio respiración</label><label><input checked type="checkbox"> Exposición gradual</label></div>
+            `,
             captionTitle: "Editor clínico",
-            captionText: "Interfaz densa para documentar sesiones, usar plantillas y firmar notas.",
+            captionText: "Editor tipo documento con toolbar, plantilla clínica y checklist de tareas.",
             token: "psychologist.session-notes"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
             title: "Biblioteca terapéutica",
@@ -445,15 +521,22 @@
             menu: [["BI", "Biblioteca"], ["GU", "Guías"], ["AU", "Audios"], ["VI", "Videos"], ["FA", "Favoritos"]],
             noteTitle: "Recurso destacado",
             note: "Guía de psicoeducación sobre ansiedad lista para compartir.",
-            metrics: [["Recursos", "148", "total"], ["Asignados", "32", "mes"], ["Favoritos", "18", "guardados"], ["Uso", "71%", "pacientes"]],
-            chartTitle: "Uso por categoría",
-            bars: [80, 64, 52, 70, 46, 58, 62],
-            rows: [["AU", "Audio respiración", "Ansiedad aguda", "popular"], ["GU", "Guía TCC", "Reestructuración", "nuevo"], ["VI", "Video sueño", "Higiene del sueño", "top"]],
+            canvasClass: "library-layout",
+            body: `
+              <div class="lurems-resource-search"><span>Buscar recursos</span><b>ansiedad, sueño, respiración</b></div>
+              <div class="lurems-resource-grid">
+                <article><i>Audio</i><strong>Respiración 4-7-8</strong><span>8 min · ansiedad aguda</span></article>
+                <article><i>Guía</i><strong>Pensamientos automáticos</strong><span>PDF · TCC</span></article>
+                <article><i>Video</i><strong>Higiene del sueño</strong><span>12 min · hábitos</span></article>
+                <article><i>Ficha</i><strong>Escala de progreso</strong><span>Formulario · semanal</span></article>
+              </div>
+              <div class="lurems-assignment-bar"><strong>Asignar a</strong><span>Ana García</span><button>Enviar</button></div>
+            `,
             captionTitle: "Recursos para terapeutas",
-            captionText: "Biblioteca para asignar material psicoeducativo y tareas entre sesiones.",
+            captionText: "Biblioteca con buscador, tipos de contenido y barra de asignación a pacientes.",
             token: "psychologist.resources"
           })}
-          ${appExample({
+          ${mockShell({
             modifier: "is-psychologist",
             eyebrow: "Psicólogo",
             title: "Facturación profesional",
@@ -461,12 +544,19 @@
             menu: [["IN", "Ingresos"], ["FA", "Facturas"], ["PA", "Pagos"], ["CO", "Comisiones"], ["RE", "Reportes"]],
             noteTitle: "Corte semanal",
             note: "Los pagos liquidados estarán disponibles el viernes.",
-            metrics: [["Ingresos", "S/ 4.8k", "mes"], ["Pendiente", "S/ 620", "liquidar"], ["Sesiones", "42", "pagadas"], ["Comisión", "12%", "promedio"]],
-            chartTitle: "Ingresos por semana",
-            bars: [44, 58, 72, 66, 84, 78, 92],
-            rows: [["PG", "Pago confirmado", "Ana García", "S/180"], ["RC", "Recibo emitido", "Jorge Vera", "ok"], ["CO", "Corte semanal", "Viernes 18:00", "pend"]],
+            canvasClass: "billing-layout",
+            body: `
+              <div class="lurems-billing-total"><span>Ingresos del mes</span><strong>S/ 4,820</strong><small>+18% vs mes anterior</small></div>
+              <div class="lurems-payout-table">
+                <div><b>Paciente</b><b>Estado</b><b>Monto</b></div>
+                <div><span>Ana García</span><em>Pagado</em><strong>S/180</strong></div>
+                <div><span>Jorge Vera</span><em>Pendiente</em><strong>S/180</strong></div>
+                <div><span>Lucía Campos</span><em>Liquidado</em><strong>S/220</strong></div>
+              </div>
+              <div class="lurems-tax-card"><strong>Recibos por emitir</strong><span>3 comprobantes listos</span><button>Emitir lote</button></div>
+            `,
             captionTitle: "Panel financiero del psicólogo",
-            captionText: "Vista profesional para ingresos, recibos, liquidaciones y control de sesiones pagadas.",
+            captionText: "Facturación con resumen, tabla de pagos y acciones para recibos profesionales.",
             token: "psychologist.billing"
           })}
         </div>
@@ -478,7 +568,7 @@
     const host = ensureWebAppsHost();
 
     if (!host.querySelector(".lurems-webapps-page") || host.dataset.version !== WEB_APPS_CONTENT_VERSION) {
-      host.innerHTML = webAppsContent();
+      host.innerHTML = variedWebAppsContent();
       host.dataset.version = WEB_APPS_CONTENT_VERSION;
     }
     document.body.classList.add("lurems-webapps-active");
@@ -496,8 +586,12 @@
     enhanceUrls();
     addBusinessCard();
     addLightPattern();
-    if (window.location.hash === "#web-apps" && !document.body.classList.contains("lurems-webapps-active")) {
-      renderWebAppsPage();
+    if (window.location.hash === "#web-apps") {
+      if (!document.body.classList.contains("lurems-webapps-active")) {
+        renderWebAppsPage();
+      } else {
+        setWebAppsNavState(true);
+      }
     }
   }
 
