@@ -485,6 +485,17 @@ body.lurems-webapps-active .lurems-webapps-host {
   padding: 4px 9px;
 }
 
+.lurems-app-example.is-patient .lurems-sidebar-item.is-active,
+.lurems-app-example.is-patient .lurems-primary-button {
+  background: #45a99a;
+}
+
+.lurems-app-example.is-patient .lurems-info-card small,
+.lurems-app-example.is-patient .lurems-app-eyebrow,
+.lurems-app-example.is-patient .lurems-status-pill {
+  color: #45a99a;
+}
+
 .lurems-app-example.is-psychologist .lurems-sidebar-item.is-active,
 .lurems-app-example.is-psychologist .lurems-primary-button {
   background: #7b6fd0;
