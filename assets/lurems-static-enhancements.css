@@ -21,6 +21,24 @@
   border-radius: 999px;
 }
 
+body.lurems-webapps-active #root > div {
+  min-height: auto !important;
+}
+
+body.lurems-webapps-active #root main,
+body.lurems-webapps-active #root main + div {
+  display: none !important;
+}
+
+.lurems-webapps-host {
+  display: none;
+  background: #f5fafa;
+}
+
+body.lurems-webapps-active .lurems-webapps-host {
+  display: block;
+}
+
 .lurems-light-link::after {
   content: "";
   display: block;

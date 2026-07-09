@@ -99,6 +99,29 @@
     });
   }
 
+  function ensureWebAppsHost() {
+    let host = document.querySelector(".lurems-webapps-host");
+    if (!host) {
+      host = document.createElement("div");
+      host.className = "lurems-webapps-host";
+      const root = document.querySelector("#root");
+      if (root && root.parentNode) {
+        root.parentNode.insertBefore(host, root.nextSibling);
+      } else {
+        document.body.appendChild(host);
+      }
+    }
+    return host;
+  }
+
+  function deactivateWebAppsPage(clearHash) {
+    document.body.classList.remove("lurems-webapps-active");
+    setWebAppsNavState(false);
+    if (clearHash && window.location.hash === "#web-apps") {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  }
+
   function addWebAppsTab() {
     const navList = findNavList();
     if (!navList) return;
@@ -291,10 +314,12 @@
   }
 
   function renderWebAppsPage() {
-    const main = document.querySelector("main");
-    if (!main) return;
+    const host = ensureWebAppsHost();
 
-    main.innerHTML = webAppsContent();
+    if (!host.querySelector(".lurems-webapps-page")) {
+      host.innerHTML = webAppsContent();
+    }
+    document.body.classList.add("lurems-webapps-active");
     setWebAppsNavState(true);
     const webAppsButton = document.querySelector("[data-lurems-tab='web-apps']");
     if (webAppsButton && typeof webAppsButton.scrollIntoView === "function") {
@@ -309,7 +334,7 @@
     enhanceUrls();
     addBusinessCard();
     addLightPattern();
-    if (window.location.hash === "#web-apps" && !document.querySelector(".lurems-webapps-page")) {
+    if (window.location.hash === "#web-apps" && !document.body.classList.contains("lurems-webapps-active")) {
       renderWebAppsPage();
     }
   }
@@ -317,6 +342,19 @@
   const observer = new MutationObserver(enhance);
   observer.observe(document.documentElement, { childList: true, subtree: true });
   window.addEventListener("load", enhance);
-  document.addEventListener("click", () => window.setTimeout(enhance, 60));
+  window.addEventListener("hashchange", () => {
+    if (window.location.hash === "#web-apps") {
+      renderWebAppsPage();
+    } else {
+      deactivateWebAppsPage(false);
+    }
+  });
+  document.addEventListener("click", (event) => {
+    const button = event.target && event.target.closest ? event.target.closest("button") : null;
+    if (button && button.closest("nav") && button.dataset.luremsTab !== "web-apps") {
+      deactivateWebAppsPage(true);
+    }
+    window.setTimeout(enhance, 60);
+  }, true);
   enhance();
 })();
