@@ -2,7 +2,7 @@
   const BUSINESS_CARD_SRC = "./assets/lurems-business-card-haz-luz.png";
   const MARK_SRC = "./assets/lurems-isotipo-transparent-CGVbIjAh.png";
   const WEB_APPS_TAB_LABEL = "16 — Web Apps";
-  const WEB_APPS_CONTENT_VERSION = "20260709-webapps-varied-2";
+  const WEB_APPS_CONTENT_VERSION = "20260711-webapps-varied-3";
 
   function textOf(node) {
     return (node.textContent || "").trim();
@@ -155,6 +155,15 @@
     });
 
     navList.appendChild(button);
+  }
+
+  function sidebarItem(icon, label, active) {
+    return `
+      <div class="lurems-sidebar-item${active ? " is-active" : ""}">
+        <span class="lurems-sidebar-icon">${icon}</span>
+        <span>${label}</span>
+      </div>
+    `;
   }
 
   function actionButton(label, active) {
